@@ -23,6 +23,8 @@ class TrafficLight:
     def running(self):
         count = 0
         next_color = 'Red'
+        color_iter = iter(cycle(self.color_times.keys()))
+        next(color_iter)
         for el in cycle(self.color_times.keys()):
             self.__color = el
             if count > 5:               # Данный переключатель сделан для демонстрации
@@ -32,12 +34,7 @@ class TrafficLight:
                 print('Ошибка порядка цветов!')
                 break
             sleep(self.color_times.get(el))
-            if self.__color == 'Red':
-                next_color = 'Yellow'
-            elif self.__color == 'Yellow':
-                next_color = 'Green'
-            elif self.__color == 'Green':
-                next_color = 'Red'
+            next_color = next(color_iter)
             count += 1
 
 
